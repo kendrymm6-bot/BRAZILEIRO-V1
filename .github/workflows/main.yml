@@ -1,0 +1,33 @@
+name: Build Brazileiro V1
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: macos-13
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Theos
+        run: |
+          sudo git clone --recursive https://github.com/theos/theos.git /opt/theos
+          sudo chown -R $USER /opt/theos
+          echo "THEOS=/opt/theos" >> $GITHUB_ENV
+
+      - name: Setup iOS SDK
+        run: |
+          git clone https://github.com/theos/sdks.git /opt/theos/sdks
+
+      - name: Make executable
+        run: chmod +x build.sh
+
+      - name: Compile Tweak
+        run: |
+          export THEOS=/opt/theos
+          ./build.sh
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Brazileiro-V1-Package
+          path: packages/*.deb
