@@ -1,0 +1,9 @@
+Package: com.brazileiro.v1
+Name: Brazileiro V1
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Panel Brasileiro para Free Fire - Todo Rojo y Vuelo
+Maintainer: Andrés
+Author: Andrés
+Section: Tweaks
